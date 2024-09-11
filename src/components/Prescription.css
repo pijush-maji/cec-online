@@ -1,0 +1,63 @@
+#prsc {
+    size: A4;
+    margin: 3mm 45mm 0mm 45mm;
+    zoom: 57%;
+
+}
+
+.clinic-logo {
+    width: 35%;
+}
+
+.doc-deg {
+    font-size: 11px;
+}
+
+.mobile {
+    float: right;
+    font-weight: bolder;
+}
+
+.logo-img {
+    float: right;
+    width: 53%;
+}
+
+.underlined-text {
+    text-decoration: underline;
+    white-space: pre;
+}
+
+.careof {
+    height: 40px;
+}
+
+.line:after {
+    content: " ";
+    display: block;
+    border-bottom: 2px solid #6e84e5;
+
+}
+
+.footer {
+    text-align: center;
+    font-size: 11px;
+    margin-top: -1%;
+    color: rgb(28, 81, 181);
+    font-weight: 600;
+}
+
+.table-borderless>tbody>tr>th,
+.table-borderless>tfoot>tr>td,
+.table-borderless>tfoot>tr>th,
+.table-borderless>thead>tr>td,
+.table-borderless>thead>tr>th {
+    border: none;
+    padding-bottom: -2%;
+}
+
+
+.eye-table {
+    table-layout: fixed;
+    width: 111%;
+}
