@@ -1,45 +1,25 @@
-const Medicine = () => {
+const Medicine = (prop) => {
+
+    const medicines = prop.medicineList
 
     return (
         <>
             <div className="medicine">
-                <table className="table table-borderless">
+                <table className="table table-borderless" style={{ width: "75%" }}>
                     <tbody>
-                        <tr>
-                            <th scope="col">BE:</th>
-                            <td>Ciplox</td>
-                            <td>e/d</td>
-                            <td>3t/d</td>
-                            <td>7days</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">BE:</th>
-                            <td>Ciplox</td>
-                            <td>e/d</td>
-                            <td>3t/d</td>
-                            <td>7days</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">BE:</th>
-                            <td>Ciplox</td>
-                            <td>e/d</td>
-                            <td>3t/d</td>
-                            <td>7days</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">BE:</th>
-                            <td>Ciplox</td>
-                            <td>e/d</td>
-                            <td>3t/d</td>
-                            <td>7days</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">BE:</th>
-                            <td>Ciplox</td>
-                            <td>e/d</td>
-                            <td>3t/d</td>
-                            <td>7days</td>
-                        </tr>
+                        {
+                            medicines.map((med, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <th scope="col">{med.eye}:</th>
+                                        <td>{med.name}</td>
+                                        <td>{med.type}</td>
+                                        <td>{med.amount}</td>
+                                        <td>{med.duration}</td>
+                                    </tr>
+                                )
+                            })
+                        }
                     </tbody>
                 </table>
             </div>

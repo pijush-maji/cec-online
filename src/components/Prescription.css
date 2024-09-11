@@ -1,7 +1,7 @@
 #prsc {
     size: A4;
-    margin: 3mm 45mm 0mm 45mm;
-    zoom: 57%;
+    margin: 3mm 8mm 0mm 8mm;
+    zoom: 80%;
 
 }
 
@@ -13,23 +13,22 @@
     font-size: 11px;
 }
 
-.mobile {
+.logo-section {
     float: right;
+}
+
+.mobile {
+    /* float: right; */
     font-weight: bolder;
 }
 
-.logo-img {
+/* .logo-img{
     float: right;
     width: 53%;
-}
-
+} */
 .underlined-text {
-    text-decoration: underline;
-    white-space: pre;
-}
-
-.careof {
-    height: 40px;
+    border-bottom: 0.1px solid;
+    display: inline-block;
 }
 
 .line:after {
@@ -56,8 +55,20 @@
     padding-bottom: -2%;
 }
 
-
-.eye-table {
+.slit-table {
     table-layout: fixed;
-    width: 111%;
+    width: 67%;
+}
+
+/* .eye-table{
+    table-layout: fixed;
+    width: 120%;
+} */
+.table td,
+.table th {
+    text-align: center;
+}
+
+.vertical-center {
+    vertical-align: middle;
 }
