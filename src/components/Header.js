@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -10,7 +12,10 @@ const Header = () => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                            <NavLink class="nav-link" to="/home" style={{textDecoration:"none",color:"black"}}>Home</NavLink>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <NavLink class="nav-link" to="/printprsc" style={{textDecoration:"none",color:"black"}}>Print</NavLink>
                         </li>
                     </ul>
                     <form class="d-flex">

@@ -8,9 +8,7 @@ import { useEffect } from 'react';
 const Prescription = () => {
 
 
-    useEffect(()=>{
-        document.title="CEC-20240911001";
-    },[]);
+    document.title = "CEC-20240911001";
 
     const medicines = [
         { eye: "BE", name: "Ciplox", "type": "e/d", amount: "3t/d", duration: "7days" },
@@ -23,24 +21,23 @@ const Prescription = () => {
     ]
     let medicineList = [];
     let remainingMedicine = [];
-    if (medicines.length > 6) {
-        medicineList = medicines.slice(0, 6);
-        remainingMedicine = medicines.slice(6);
+    if (medicines.length > 5) {
+        medicineList = medicines.slice(0, 5);
+        remainingMedicine = medicines.slice(5);
     } else {
         medicineList = medicines;
     }
     //length 81
     let name = "Partha Sarathi Pal";
     //length 14
-    let age = " 25yr 11m     ";
+    let age = "25yr 11m";
     //len 12
-    let gender = " Others     ";
+    let gender = "Others";
     //len 13
-    let date = " 09-09-2024  ";
+    let date = "09-09-2024";
     //length 172
-    let address = " abc                                                                               " +
-        "                                           ";
-    let mobile = " 0987654321" + "      ";
+    let address = "abc";
+    let mobile = "0987654321";
 
 
     return (
@@ -127,7 +124,7 @@ const Prescription = () => {
                         </div>
                     </div>
                     <div className='col-7'>
-                        <table className="table table-bordered border-primary">
+                        <table className="table table-bordered border-dark">
                             <thead>
                                 <tr>
                                     <th scope="col" colSpan="2">R<span style={{ fontSize: "13px" }}>x</span> Spec</th>
@@ -175,10 +172,10 @@ const Prescription = () => {
                         </table>
                     </div>
                 </div>
-                <div className='row mt-3' style={{ height: "23rem" }}>
-                    <div className='col-4'>
+                <div className='row' style={{ height: "27rem",marginTop:"-2%" }}>
+                    <div className='col-8'>
                         <h5 style={{ textAlign: "center" }}>Slit Lamp Examination</h5>
-                        <table className="table table-bordered border-primary slit-tables">
+                        <table className="table table-bordered border-dark slit-tables">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -188,14 +185,16 @@ const Prescription = () => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope='row'>Eyelids</th>
+                                    <th scope='row' style={{width:"10%"}}>Eyelids</th>
                                     <td>test</td>
                                     <td>test</td>
                                 </tr>
                                 <tr>
                                     <th scope='row'>Conjunctiva</th>
-                                    <td>test</td>
-                                    <td>test</td>
+                                    <td>long text with proper description and long text with another description
+                                        sldkfjs flsdjflsjdf lskjf lakjsdf kdjsflka dflasd f
+                                    </td>
+                                    <td>adsfjaslkdjflasjdf lkjasldkfjasl lksadjfl sadlkf j</td>
                                 </tr>
                                 <tr>
                                     <th scope='row'>Sclera</th>
@@ -205,7 +204,7 @@ const Prescription = () => {
                                 <tr>
                                     <th scope='row'>Cornea</th>
                                     <td>test</td>
-                                    <td>test</td>
+                                    <td>hg lg kjh kkjh </td>
                                 </tr>
                                 <tr>
                                     <th scope='row'>A/C</th>
@@ -214,7 +213,7 @@ const Prescription = () => {
                                 </tr>
                                 <tr>
                                     <th scope='row'>Irish</th>
-                                    <td>test</td>
+                                    <td>hjg jhg jhgh j jhgjhg j jhg jh jhgj j jh </td>
                                     <td>test</td>
                                 </tr>
                                 <tr>
@@ -226,25 +225,18 @@ const Prescription = () => {
 
                         </table>
                     </div>
-                    <div className='col-8'>
+                    <div className='col-4'>
                         <div className='row'>
-                            <div className='col-9'>
-                                <div style={{ height: "30%" }}>
-                                    <h5>Diagnosis : </h5>
-                                    <div>
-                                        ndustry. Lorem Ipsum has been the industry's standard dummy
-                                        <br />
-                                        text ever since the 1500s, when an unknown printer took a galley of type
-                                        <br /> and scrambled it to make a type specimen book. It has survived not
-                                        <br />only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with t
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='col-3'>
-                                <h5>IOP : </h5>
-                                <div>RE : value mmHg</div>
-                                <div>LE : value mmHg</div>
+                            <h5>IOP : </h5>
+                            <div>RE : value mmHg</div>
+                            <div>LE : value mmHg</div>
+                        </div>
+                        <div className='row'>
+                            <h5>Diagnosis : </h5>
+                            <div>
+                                This is first line
+                                <br />
+                                This is second line
                             </div>
                         </div>
                         <div className='row'>
@@ -259,7 +251,7 @@ const Prescription = () => {
                         </div>
                     </div>
                 </div>
-                <div className='row mt-4' style={{ height: "18rem" }}>
+                <div className='row mt-4' style={{ height: "15rem" }}>
                     <h5>R<span style={{ fontSize: "14px" }}>x</span>,</h5>
                     <div className='col'>
                         <Medicine medicineList={medicineList} />
