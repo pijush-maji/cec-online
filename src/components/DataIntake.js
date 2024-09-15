@@ -3,12 +3,18 @@ import './DataIntake.css';
 
 const DataIntake = () => {
 
+    var today = new Date().toJSON().slice(0, 10);
+
+
 
     const [name, setName] = useState('');
-    const [ageYear, setAgeYear] = useState('0');
+    const [ageYear, setAgeYear] = useState(0);
     const [ageMonth, setAgeMonth] = useState('0');
-    const [gender, setGender] = useState('Selected');
-    const [lastVisited, setLastVisited] = useState('')
+    const [gender, setGender] = useState('Select');
+    const [lastVisited, setLastVisited] = useState(today);
+    const [address, setAddress] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [careof, setCareof] = useState('');
 
 
 
@@ -18,15 +24,23 @@ const DataIntake = () => {
     const handleAgeYearChange = (e) => {
         setAgeYear(e.target.value);
     }
-    const handleAgeMonthChange = (e) =>{
+    const handleAgeMonthChange = (e) => {
         setAgeMonth(e.target.value);
     }
-    const handleGenderChange = (e) =>{
+    const handleGenderChange = (e) => {
         setGender(e.target.value);
     }
-    const handleLastVisitedChange = (e) =>{
+    const handleLastVisitedChange = (e) => {
         setLastVisited(e.target.value);
-        console.log(lastVisited);
+    }
+    const handleAddressChange = (e) =>{
+        setAddress(e.target.value);
+    }
+    const handleMobileChange = (e) =>{
+        setMobile(e.target.value);
+    }
+    const handleCareofChange = (e) =>{
+        setCareof(e.target.value);
     }
 
 
@@ -43,21 +57,21 @@ const DataIntake = () => {
                             </div>
                             <div className="col-3">
                                 <label htmlFor="name" className="form-label">Name</label>
-                                <input type="text" id="name" className="form-control" onChange={handleNameChange} />
+                                <input type="text" value={name} className="form-control" onChange={handleNameChange} />
                             </div>
                             <div className="col-1">
                                 <label htmlFor="year" className="form-label">Age(Year)</label>
-                                <input type="number" name="year" className="form-control" placeholder="YY"
-                                    max={100} min="0" onChange={handleAgeYearChange}/>
+                                <input type="number" value={ageYear} className="form-control" placeholder="YY"
+                                    max={100} min="0" onChange={handleAgeYearChange} />
                             </div>
                             <div className="col-1">
                                 <label htmlFor="month" className="form-label">Age(Month)</label>
-                                <input type="number" name="month" className="form-control" placeholder="MM"
+                                <input type="number" value={ageMonth} className="form-control" placeholder="MM"
                                     min={0} max={11} onChange={handleAgeMonthChange} />
                             </div>
                             <div className='col-2'>
                                 <label htmlFor="gender" className="form-label">Gender</label>
-                                <select id="gender" name="gender" className="form-select" onChange={handleGenderChange}>
+                                <select id="gender" value={gender} className="form-select" onChange={handleGenderChange}>
                                     <option value="Select">Select</option>
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
@@ -66,24 +80,24 @@ const DataIntake = () => {
                             </div>
                             <div className='col-2'>
                                 <label htmlFor="lastVisited" className="form-label">Last Visited</label>
-                                <input type="date" id='lastVisited' className="form-control" onChange={handleLastVisitedChange}/>
+                                <input type="date" value={lastVisited} className="form-control" onChange={handleLastVisitedChange} />
                             </div>
                         </div>
                         <div className='row'>
                             <div className='col-6'>
                                 <label htmlFor="address" className="form-label">Address</label>
-                                <input type="text" id="address" className="form-control" />
+                                <input type="text" value={address} className="form-control" onChange={handleAddressChange} />
                             </div>
                             <div className='col-2'>
                                 <label htmlFor="mobile" className="form-label">Mobile</label>
-                                <input type="text" id="mobile" className="form-control" />
+                                <input type="text" value={mobile} className="form-control" onChange={handleMobileChange} />
                             </div>
 
                         </div>
                         <div className='row mt-4'>
                             <div className='col'>
                                 <label htmlFor="adtnInfo" className="form-label">Additional Info</label>
-                                <textarea id="adtnInfo" rows="4" className="form-control"></textarea>
+                                <textarea value={careof} rows="4" className="form-control" onChange={handleCareofChange}></textarea>
                             </div>
                             <div className='col'>
                                 <h6>V<sub>A</sub> Data</h6>
