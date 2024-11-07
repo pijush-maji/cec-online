@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './DataIntake.css';
-import { addLeSphereData, addReSphereData, dataObj, distanceLeCylinderData, distanceLeSphereData, distanceReCylinderData, distanceReSphereData, medicineObj } from './CecConstants';
+import { addSphereData, dataObj, distanceCylinderData, distanceSphereData, medicineObj } from './CecConstants';
 import MedicineIntake from './MedicineIntake';
 
 const DataIntake = () => {
@@ -47,22 +47,22 @@ const DataIntake = () => {
         })
         setMed(medicineObj);
     }
-    const handleMedChange = (e) =>{
-        const {name,value} = e.target;
-        setMed(prvData=>{
-            return{
+    const handleMedChange = (e) => {
+        const { name, value } = e.target;
+        setMed(prvData => {
+            return {
                 ...prvData,
                 [name]: value
             }
         });
     }
     const removeMedicine = (med) => {
-        setMedList(prvData=>{
+        setMedList(prvData => {
             const temp = prvData;
-            const temp1 = temp.filter(m=>m!==med)
+            const temp1 = temp.filter(m => m !== med)
             return temp1;
         });
-        
+
     }
 
     return (
@@ -165,6 +165,13 @@ const DataIntake = () => {
                                             <td><input type="text" id="vaLeNear" name="vaLeNear" className="form-control"
                                                 value={formData.vaLeNear} onChange={handleFormDataChange} /></td>
                                         </tr>
+                                        <tr>
+                                            <th colSpan={2}>Remarks</th>
+                                            <td colSpan={3}>
+                                                <textarea id="vaRemarks" name="vaRemarks" value={formData.vaRemarks}
+                                                onChange={handleFormDataChange} rows={2} style={{width:"90%"}}/>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -175,19 +182,19 @@ const DataIntake = () => {
                                     <thead>
                                         <tr>
                                             <th scope="col" colSpan="2">R<span style={{ fontSize: "13px" }}>x</span> Spec</th>
-                                            <th scope="col" style={{width:"16%"}}>SPHERE</th>
+                                            <th scope="col" style={{ width: "16%" }}>SPHERE</th>
                                             <th scope="col">CYLINDER</th>
                                             <th scope="col">AXIS</th>
                                             <th scope="col">PRISM</th>
-                                            <th scope="col">V/A</th>
+                                            <th scope="col">V<sub>A</sub></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row" rowSpan="2" className='vertical-center'>DISTANCE</th>
                                             <td>RE</td>
-                                            <td>{createSelectTag("distanceReSphere", distanceReSphereData, formData.distanceReSphere)}</td>
-                                            <td>{createSelectTag("distanceReCylinder", distanceReCylinderData, formData.distanceReCylinder)}</td>
+                                            <td>{createSelectTag("distanceReSphere", distanceSphereData, formData.distanceReSphere)}</td>
+                                            <td>{createSelectTag("distanceReCylinder", distanceCylinderData, formData.distanceReCylinder)}</td>
                                             <td><input type='text' id='distanceReAxis' name='distanceReAxis' className='form-control'
                                                 value={formData.distanceReAxis} onChange={handleFormDataChange} /></td>
                                             <td><input type='text' id='distanceRePrism' name='distanceRePrism' className='form-control'
@@ -197,8 +204,8 @@ const DataIntake = () => {
                                         </tr>
                                         <tr>
                                             <td>LE</td>
-                                            <td>{createSelectTag("distanceLeSphere", distanceLeSphereData, formData.distanceLeSphere)}</td>
-                                            <td>{createSelectTag("distanceLeCylinder", distanceLeCylinderData, formData.distanceLeCylinder)}</td>
+                                            <td>{createSelectTag("distanceLeSphere", distanceSphereData, formData.distanceLeSphere)}</td>
+                                            <td>{createSelectTag("distanceLeCylinder", distanceCylinderData, formData.distanceLeCylinder)}</td>
                                             <td><input type='text' id='distanceLeAxis' name='distanceLeAxis' className='form-control'
                                                 value={formData.distanceLeAxis} onChange={handleFormDataChange} /></td>
                                             <td><input type='text' id='distanceLePrism' name='distanceLePrism' className='form-control'
@@ -209,7 +216,7 @@ const DataIntake = () => {
                                         <tr>
                                             <th scope="row" rowSpan="2" className='vertical-center'>ADD</th>
                                             <td>RE</td>
-                                            <td>{createSelectTag("addReSphere", addReSphereData, formData.addReSphere)}</td>
+                                            <td>{createSelectTag("addReSphere", addSphereData, formData.addReSphere)}</td>
                                             <td colSpan="4" rowSpan="4">
                                                 <label htmlFor="addInfo" className="form-label">Additional Info</label>
                                                 <textarea id='addInfo' name='addInfo' cols="50" rows="4" className='form-control'
@@ -218,7 +225,7 @@ const DataIntake = () => {
                                         </tr>
                                         <tr>
                                             <td>LE</td>
-                                            <td>{createSelectTag("addLeSphere", addLeSphereData, formData.addLeSphere)}</td>
+                                            <td>{createSelectTag("addLeSphere", addSphereData, formData.addLeSphere)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,24 +299,28 @@ const DataIntake = () => {
                                 </div>
                             </div>
                             <div className='col'>
-                                <b>Add Medicine</b>
+                                <b>Add Medicine</b><br/>
                                 <div style={{ display: "inline-flex", height: "37px", marginTop: "13px" }}>
-                                    <select name="eye" value={med.eye} className="form-select" onChange={handleMedChange}>
+                                    <select name="eye" value={med.eye} className="form-select" 
+                                    style={{width:"18%"}}
+                                    onChange={handleMedChange}>
                                         <option value="BE">BE</option>
                                         <option value="LE">RE</option>
                                         <option value="LE">LE</option>
                                     </select>
-                                    <input name="medName" value={med.medName} type="text" className="form-control" onChange={handleMedChange} />
-                                    <select name="medType" value={med.medType} className="form-select" onChange={handleMedChange}>
-                                        <option value="e/d">e/d</option>
-                                        <option value="oint">Oint</option>
-                                        <option value="Tab">Tab</option>
+                                    <select name="medName" value={med.medName} className="lm-5 form-select" onChange={handleMedChange}>
+                                        <option value="1">Med1 lkjdlf slkdj sdlfjklsdfj lsdkfjlsf 121 </option>
+                                        <option value="2">Med2</option>
+                                        <option value="3">Med3</option>
                                     </select>
-                                    <input name="medFreq" value={med.medFreq} type="text" className="form-control" onChange={handleMedChange} />
-                                    <input name="medDuration" value={med.medDuration} type="text" className="form-control" onChange={handleMedChange} />
-                                    <button type="button" className="btn btn-primary" onClick={() => addMedicine()}>ADD</button>
+                                    <input name="medType" value={med.medType} type="text" className="lm-5 form-control" 
+                                    style={{width:"25%"}}
+                                    onChange={handleMedChange} />
+                                    <button type="button" className="lm-5 btn btn-primary" onClick={() => addMedicine()}>ADD</button>
                                 </div>
-                                <b>Added Medicines</b>
+                                <div>
+                                    <b>Added Medicines</b>
+                                </div>
                                 {medList.map((med, inx) => {
                                     return (
                                         <MedicineIntake
