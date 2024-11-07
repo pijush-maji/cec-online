@@ -1,8 +1,14 @@
 #prsc {
     size: A4;
-    margin: 1mm 1mm 0mm 1mm;
+    margin: 0mm 2mm 2mm 0mm;
     zoom: 80%;
 
+}
+.title{
+    font-size: 35px;
+    font-weight: 600;
+    color: darkblue;
+    font-family: cursive;
 }
 
 .clinic-logo {

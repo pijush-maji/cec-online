@@ -5,3 +5,12 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
+
+.add>img{
+    width: 26px;
+    cursor: pointer;
+}
+
+.remove{
+
+}

@@ -4,7 +4,7 @@ import Header from "./Header";
 const Home = () => {
     document.title="Home";
     return (
-        <div className="container">
+        <div >
             <Header />
             <DataIntake />
         </div>

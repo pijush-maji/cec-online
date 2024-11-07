@@ -47,11 +47,16 @@ const Prescription = () => {
                     <div className="col-9">
                         <div className="doc-title">
                             <div>
-                                <img src={cliniclogo} className='clinic-logo' alt='Clinic' />
+                                <div className='title'>
+                                    Chinya Eye Care
+                                </div>
+                                <div>
+                                    Get the Best Vision
+                                </div>
                             </div>
-                            <div className="doc-name">
-                                <span style={{ fontSize: "20px" }}><strong>Aritra Chinya</strong></span>
-                                <span style={{ fontSize: "14px" }}> (Consultant Optometrist)</span>
+                            <div className="doc-name" style={{ fontSize: "20px" }}>
+                                <span style={{fontWeight:"500"}}>Aritra Chinya</span>
+                                <i> (Consultant Optometrist)</i>
                             </div>
                             <div className="doc-deg">
                                 Ph.D. Scholar (Public Health Optometry), Ex- Consultant <br />
@@ -74,38 +79,40 @@ const Prescription = () => {
                 <hr />
                 <div className='row mb-2'>
                     <div className='col-3'>
-                        MRID : <span className='underlined-text' style={{}}>CEC-20240911001</span>
+                        MRID : <span style={{}}><i>CEC-20240911001</i></span>
                     </div>
                     <div className='col-5'>
-                        Name : <span className='underlined-text' style={{ width: "83%" }}></span>
+                        Name : <span  style={{ }}><i>Aritra Chinya</i></span>
                     </div>
                     <div className='col'>
-                        Age: <span className='underlined-text' style={{ width: "62%" }}>{age}</span>
+                        Age: <span  style={{ width: "62%" }}>{age}</span>
                     </div>
                     <div className='col'>
-                        Gender: <span className='underlined-text' style={{ width: "50%" }}>{gender}</span>
+                        Gender: <span  style={{ width: "50%" }}>{gender}</span>
                     </div>
 
                 </div>
                 <div className='row mb-2'>
                     <div className='col-7'>
-                        Address: <span className='underlined-text' style={{ width: "80%" }}>{address}</span>
+                        Address: <span style={{ width: "80%" }}>{address}</span>
                     </div>
                     <div className='col'>
-                        Mobile: <span className='underlined-text' style={{ width: "62%" }}>{mobile}</span>
+                        Mobile: <span style={{ width: "62%" }}>{mobile}</span>
                     </div>
                     <div className='col'>
-                        Date: <span className='underlined-text' style={{ width: "62%" }}>{date}</span>
+                        Date: <span style={{ width: "62%" }}>{date}</span>
                     </div>
                 </div>
+                <hr />
                 <div className='row'>
                     <div className='careof' style={{ height: "3rem" }}>
-                        sp/o <br />
-                        sldkjf data <br />
-                        another data <br />
+                        C/o- RE: Blured in near abnd distance  since 5 months <br />
+                        LE: watering snd forignbody sensation since 1 week, No h/o injury. <br />
+                        H/o- BE: Cataract sx with PCIOL 5 years ago (Re: 5 years, LE: 4 Years) <br />
+                        Mo/h- DM since 10 years (under Control by Medication)
                     </div>
                 </div>
-                <div className="row mt-3" style={{ height: "15rem" }}>
+                <div className="row mt-3" style={{}}>
                     <div className='col-5'>
                         <div style={{ marginTop: "13%" }}>
                             <span style={{ fontSize: "30px", fontWeight: "500" }}>V</span>
@@ -191,10 +198,8 @@ const Prescription = () => {
                                 </tr>
                                 <tr>
                                     <th scope='row'>Conjunctiva</th>
-                                    <td>long text with proper description and long text with another description
-                                        sldkfjs flsdjflsjdf lskjf lakjsdf kdjsflka dflasd f
-                                    </td>
-                                    <td>adsfjaslkdjflasjdf lkjasldkfjasl lksadjfl sadlkf j</td>
+                                    <td>Flat</td>
+                                    <td>Flat</td>
                                 </tr>
                                 <tr>
                                     <th scope='row'>Sclera</th>
@@ -213,7 +218,7 @@ const Prescription = () => {
                                 </tr>
                                 <tr>
                                     <th scope='row'>Irish</th>
-                                    <td>hjg jhg jhgh j jhgjhg j jhg jh jhgj j jh </td>
+                                    <td>test</td>
                                     <td>test</td>
                                 </tr>
                                 <tr>
