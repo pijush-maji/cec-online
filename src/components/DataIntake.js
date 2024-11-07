@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './DataIntake.css';
 import { addLeSphereData, addReSphereData, dataObj, distanceLeCylinderData, distanceLeSphereData, distanceReCylinderData, distanceReSphereData, medicineObj } from './CecConstants';
 import MedicineIntake from './MedicineIntake';

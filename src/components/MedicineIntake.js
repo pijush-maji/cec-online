@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 const MedicineIntake = (props) =>{
 
@@ -20,7 +20,7 @@ const MedicineIntake = (props) =>{
             </select>
             <input disabled name="medFreq" value={props.med.medFreq} type="text" className="form-control" onChange={handleMedChange} />
             <input disabled name="medDuration" value={props.med.medDuration} type="text" className="form-control" onChange={handleMedChange} />
-            <img src="./minus.png"  style={{cursor:"pointer"}} onClick={()=>props.removeMed(props.med)}/>
+            <img src="./minus.png" alt="delete"  style={{cursor:"pointer"}} onClick={()=>props.removeMed(props.med)}/>
         </div>
     )
 }

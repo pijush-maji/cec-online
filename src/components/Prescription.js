@@ -1,9 +1,7 @@
 import './Prescription.css';
 import logo from './ceclogo.PNG';
-import cliniclogo from './clinic-logo.PNG';
 import arrow_icon from './arrow_icon.PNG';
 import Medicine from './Medicine';
-import { useEffect } from 'react';
 
 const Prescription = () => {
 
@@ -28,7 +26,7 @@ const Prescription = () => {
         medicineList = medicines;
     }
     //length 81
-    let name = "Partha Sarathi Pal";
+    //let name = "Partha Sarathi Pal";
     //length 14
     let age = "25yr 11m";
     //len 12
@@ -118,7 +116,7 @@ const Prescription = () => {
                             <span style={{ fontSize: "30px", fontWeight: "500" }}>V</span>
                             <sub>A(unaided)</sub>
                             <span style={{ display: "-webkit-inline-box" }}>
-                                <img src={arrow_icon} />
+                                <img src={arrow_icon} alt='arrow' />
                                 <div className='row' style={{ marginLeft: "0%", marginTop: "-3%" }}>
                                     6/9 <span className='line' style={{ marginTop: "-41%", marginLeft: "15%" }}></span>
                                     <span style={{ marginLeft: "92%", marginTop: "-81%" }}>N6</span>
