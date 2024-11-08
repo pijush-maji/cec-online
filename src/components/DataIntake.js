@@ -168,8 +168,8 @@ const DataIntake = () => {
                                         <tr>
                                             <th colSpan={2}>Remarks</th>
                                             <td colSpan={3}>
-                                                <textarea id="vaRemarks" name="vaRemarks" value={formData.vaRemarks}
-                                                onChange={handleFormDataChange} rows={2} style={{width:"90%"}}/>
+                                                <textarea id="vaRemarks" name="vaRemarks" className='form-control' value={formData.vaRemarks}
+                                                    onChange={handleFormDataChange} rows={2} style={{ width: "90%" }} />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -283,11 +283,17 @@ const DataIntake = () => {
                         <div className='row'>
                             <div className='col'>
                                 <div className='row'>
-                                    <h5>IOP : </h5>
-                                    <span style={{ display: "inline-flex" }}>RE : <input type='text' id="iopRe" name="iopRe" value={formData.iopRe} onChange={handleFormDataChange}
-                                        className='form-control' style={{ width: "20%" }} />&nbsp; mmHg</span>
-                                    <span className='mt-3' style={{ display: "inline-flex" }}>LE : <input type='text' id="iopLe" name="iopLe" value={formData.iopLe} onChange={handleFormDataChange}
-                                        className='form-control' style={{ width: "20%" }} />&nbsp;mmHg</span>
+                                    <div className='col'>
+                                        <h5>IOP : </h5>
+                                        <span style={{ display: "inline-flex" }}>RE : <input type='text' id="iopRe" name="iopRe" value={formData.iopRe} onChange={handleFormDataChange}
+                                            className='form-control' style={{ width: "20%" }} />&nbsp; mmHg</span>
+                                        <span className='mt-3' style={{ display: "inline-flex" }}>LE : <input type='text' id="iopLe" name="iopLe" value={formData.iopLe} onChange={handleFormDataChange}
+                                            className='form-control' style={{ width: "20%" }} />&nbsp;mmHg</span>
+                                    </div>
+                                    <div className='col'>
+                                        <textarea id="iopDesc" name="iopDesc" value={formData.iopDesc} 
+                                        onChange={handleFormDataChange}  className='form-control iopDesc'/>
+                                    </div>
                                 </div>
                                 <div className='row'>
                                     <h5>Diagnosis : </h5>
@@ -299,11 +305,11 @@ const DataIntake = () => {
                                 </div>
                             </div>
                             <div className='col'>
-                                <b>Add Medicine</b><br/>
+                                <b>Add Medicine</b><br />
                                 <div style={{ display: "inline-flex", height: "37px", marginTop: "13px" }}>
-                                    <select name="eye" value={med.eye} className="form-select" 
-                                    style={{width:"18%"}}
-                                    onChange={handleMedChange}>
+                                    <select name="eye" value={med.eye} className="form-select"
+                                        style={{ width: "18%" }}
+                                        onChange={handleMedChange}>
                                         <option value="BE">BE</option>
                                         <option value="LE">RE</option>
                                         <option value="LE">LE</option>
@@ -313,9 +319,9 @@ const DataIntake = () => {
                                         <option value="2">Med2</option>
                                         <option value="3">Med3</option>
                                     </select>
-                                    <input name="medType" value={med.medType} type="text" className="lm-5 form-control" 
-                                    style={{width:"25%"}}
-                                    onChange={handleMedChange} />
+                                    <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
+                                        style={{ width: "25%" }}
+                                        onChange={handleMedChange} />
                                     <button type="button" className="lm-5 btn btn-primary" onClick={() => addMedicine()}>ADD</button>
                                 </div>
                                 <div>
@@ -331,6 +337,16 @@ const DataIntake = () => {
                                 })}
                             </div>
                         </div>
+                        
+                        {/* <input list="browsers" name="browser" id="browser" className='form-select'/>
+                        <datalist id="browsers">
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                        </datalist> */}
+
+                        
 
                         <div style={{ float: "right" }}>
                             <button style={{ marginRight: "15px" }} className="mt-3 btn btn-secondary">Cancel</button>
