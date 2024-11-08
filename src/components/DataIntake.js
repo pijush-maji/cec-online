@@ -21,8 +21,24 @@ const DataIntake = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        formData.medList=medList;
         console.log(formData)
         //add validation for distanceReAxis and distanceLeAxis range 0-180
+        if(formData.patientName==="" || formData.patientName===" "){
+            alert("Patient Name is blank!");
+            return;
+        }
+        fetch("http://localhost:9091/save",{
+            method:'Post',
+            headers: { 
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(formData)
+        })
+        .then(data=>data.json())
+        .then(json=>alert(json.msg));
+        setFormData(dataObj);
     }
 
     const createSelectTag = (name, range, value) => {
@@ -92,6 +108,11 @@ const DataIntake = () => {
                                     min={0} max={11} onChange={handleFormDataChange} value={formData.ageMonth} />
                             </div>
                             <div className='col-2'>
+                                <label htmlFor="dob" className="form-label">Date of Birth</label>
+                                <input type="date" className="form-control" id="dob" name="dob"
+                                    onChange={handleFormDataChange} value={formData.dob} />
+                            </div>
+                            <div className='col-2'>
                                 <label htmlFor="gender" className="form-label">Gender</label>
                                 <select id="gender" name="gender" className="form-select"
                                     onChange={handleFormDataChange} value={formData.gender}>
@@ -101,11 +122,7 @@ const DataIntake = () => {
                                     <option value="O">Others</option>
                                 </select>
                             </div>
-                            <div className='col-2'>
-                                <label htmlFor="lastVisited" className="form-label">Last Visited</label>
-                                <input type="date" className="form-control" name="lastVisited"
-                                    onChange={handleFormDataChange} value={formData.lastVisited} />
-                            </div>
+                            
                         </div>
                         <div className='row'>
                             <div className='col-6'>
@@ -117,6 +134,11 @@ const DataIntake = () => {
                                 <label htmlFor="mobile" className="form-label">Mobile</label>
                                 <input type="text" className="form-control" name="mobile"
                                     onChange={handleFormDataChange} value={formData.mobile} />
+                            </div>
+                            <div className='col-2'>
+                                <label htmlFor="dateOfVisit" className="form-label">Date of Visit</label>
+                                <input type="date" className="form-control" id="dateOfVisit" name="dateOfVisit"
+                                    onChange={handleFormDataChange} value={formData.dateOfVisit} />
                             </div>
 
                         </div>
