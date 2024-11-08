@@ -8,7 +8,7 @@ const MedicineIntake = (props) =>{
     return(
         <div style={{ display: "inline-flex", height: "37px", marginTop: "13px" }}>
             <select disabled name="eye" value={props.med.eye} className="form-select" 
-            style={{width:"18%"}} onChange={handleMedChange}>
+            style={{width:"25%"}} onChange={handleMedChange}>
                 <option value="BE">BE</option>
                 <option value="LE">RE</option>
                 <option value="LE">LE</option>

@@ -19,3 +19,9 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: -28%;
     margin-top: 18%;
 }
+.plus-icon{
+    margin-top: 1%;
+    height: 65%;
+    width: 8%;
+    cursor: pointer;
+}

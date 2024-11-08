@@ -67,7 +67,7 @@ const DataIntake = () => {
 
     return (
         <>
-            <div className="card">
+            <div className="card" style={{backgroundColor:"aliceblue"}}>
                 <div className="card-body">
                     <h5 className="card-title">Patient Details Form</h5>
                     <form onSubmit={handleSubmit}>
@@ -308,21 +308,21 @@ const DataIntake = () => {
                                 <b>Add Medicine</b><br />
                                 <div style={{ display: "inline-flex", height: "37px", marginTop: "13px" }}>
                                     <select name="eye" value={med.eye} className="form-select"
-                                        style={{ width: "18%" }}
+                                        style={{ width: "25%" }}
                                         onChange={handleMedChange}>
                                         <option value="BE">BE</option>
                                         <option value="LE">RE</option>
                                         <option value="LE">LE</option>
                                     </select>
                                     <select name="medName" value={med.medName} className="lm-5 form-select" onChange={handleMedChange}>
-                                        <option value="1">Med1 lkjdlf slkdj sdlfjklsdfj lsdkfjlsf 121 </option>
+                                        <option value="1">Med1</option>
                                         <option value="2">Med2</option>
                                         <option value="3">Med3</option>
                                     </select>
                                     <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
                                         style={{ width: "25%" }}
                                         onChange={handleMedChange} />
-                                    <button type="button" className="lm-5 btn btn-primary" onClick={() => addMedicine()}>ADD</button>
+                                    <img src="./plus.png" alt="add" className="lm-5 plus-icon" onClick={addMedicine}/>
                                 </div>
                                 <div>
                                     <b>Added Medicines</b>
@@ -337,7 +337,7 @@ const DataIntake = () => {
                                 })}
                             </div>
                         </div>
-                        
+
                         {/* <input list="browsers" name="browser" id="browser" className='form-select'/>
                         <datalist id="browsers">
                             <option value={1}>1</option>
