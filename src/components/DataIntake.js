@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import './DataIntake.css';
-import { addSphereData, dataObj, distanceCylinderData, distanceSphereData, medicineObj } from './CecConstants';
+import {
+    addSphereData, dataObj, distanceCylinderData,
+    distanceSphereData, medicineObj, signData
+} from './CecConstants';
 import MedicineIntake from './MedicineIntake';
 
 const DataIntake = () => {
@@ -8,6 +11,7 @@ const DataIntake = () => {
     const [formData, setFormData] = useState(dataObj);
     const [med, setMed] = useState(medicineObj);
     const [medList, setMedList] = useState([]);
+    const [sign, setSign] = useState(signData)
 
     const handleFormDataChange = (e) => {
         const { name, value } = e.target
@@ -19,26 +23,52 @@ const DataIntake = () => {
         })
     }
 
+    const handleSignChange = (e) => {
+        const { name, value } = e.target
+        setSign(prvData => {
+            return {
+                ...prvData,
+                [name]: value
+            }
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        formData.medList=medList;
-        console.log(formData)
+        formData.medList = medList;
         //add validation for distanceReAxis and distanceLeAxis range 0-180
-        if(formData.patientName==="" || formData.patientName===" "){
+        if (formData.patientName === "" || formData.patientName === " ") {
             alert("Patient Name is blank!");
             return;
         }
-        fetch("http://localhost:9091/save",{
-            method:'Post',
-            headers: { 
-                'Accept': 'application/json', 
+        if(formData.distanceReSphere!=="" && formData.distanceReSphere!=="N/A" && formData.distanceReSphere!=="0.00" ){
+            formData.distanceReSphere = sign.signReSphr+formData.distanceReSphere;
+        }
+        if(formData.distanceLeSphere!=="" && formData.distanceLeSphere!=="N/A" && formData.distanceLeSphere!=="0.00" )
+            formData.distanceLeSphere = sign.signLeSphr+formData.distanceLeSphere;
+        if(formData.distanceReCylinder!=="" && formData.distanceReCylinder!=="N/A" && formData.distanceReCylinder!=="0.00" )
+            formData.distanceReCylinder = sign.signReCyln+formData.distanceReCylinder;
+        if(formData.distanceLeCylinder!=="" && formData.distanceLeCylinder!=="N/A" && formData.distanceLeCylinder!=="0.00" )
+            formData.distanceLeCylinder = sign.signLeCyln+formData.distanceLeCylinder;
+
+        
+        if(formData.addReSphere!=="" && formData.addReSphere!=="N/A" && formData.addReSphere!=="0.00" )
+            formData.addReSphere = "+"+formData.addReSphere;
+        if(formData.addLeSphere!=="" && formData.addLeSphere!=="N/A" && formData.addLeSphere!=="0.00" )
+            formData.addLeSphere = "+"+formData.addLeSphere;
+        
+        fetch("http://localhost:9091/save", {
+            method: 'Post',
+            headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify(formData)
+            body: JSON.stringify(formData)
         })
-        .then(data=>data.json())
-        .then(json=>alert(json.msg));
+            .then(data => data.json())
+            .then(json => alert(json.msg));
         setFormData(dataObj);
+        setMedList([])
     }
 
     const createSelectTag = (name, range, value) => {
@@ -83,7 +113,7 @@ const DataIntake = () => {
 
     return (
         <>
-            <div className="card" style={{backgroundColor:"aliceblue"}}>
+            <div className="card" style={{ backgroundColor: "aliceblue" }}>
                 <div className="card-body">
                     <h5 className="card-title">Patient Details Form</h5>
                     <form onSubmit={handleSubmit}>
@@ -122,7 +152,7 @@ const DataIntake = () => {
                                     <option value="O">Others</option>
                                 </select>
                             </div>
-                            
+
                         </div>
                         <div className='row'>
                             <div className='col-6'>
@@ -215,8 +245,20 @@ const DataIntake = () => {
                                         <tr>
                                             <th scope="row" rowSpan="2" className='vertical-center'>DISTANCE</th>
                                             <td>RE</td>
-                                            <td>{createSelectTag("distanceReSphere", distanceSphereData, formData.distanceReSphere)}</td>
-                                            <td>{createSelectTag("distanceReCylinder", distanceCylinderData, formData.distanceReCylinder)}</td>
+                                            <td>
+                                                <select className='form-select' id="signReSphr" name="signReSphr" value={sign.signReSphr}
+                                                    onChange={handleSignChange} >
+                                                    <option value="+">+</option>
+                                                    <option value="-">-</option>
+                                                </select>
+                                                {createSelectTag("distanceReSphere", distanceSphereData, formData.distanceReSphere)}</td>
+                                            <td>
+                                                <select className='form-select' id="signReCyln" name="signReCyln" value={sign.signReCyln}
+                                                    onChange={handleSignChange} >
+                                                    <option value="+">+</option>
+                                                    <option value="-">-</option>
+                                                </select>
+                                                {createSelectTag("distanceReCylinder", distanceCylinderData, formData.distanceReCylinder)}</td>
                                             <td><input type='text' id='distanceReAxis' name='distanceReAxis' className='form-control'
                                                 value={formData.distanceReAxis} onChange={handleFormDataChange} /></td>
                                             <td><input type='text' id='distanceRePrism' name='distanceRePrism' className='form-control'
@@ -226,8 +268,20 @@ const DataIntake = () => {
                                         </tr>
                                         <tr>
                                             <td>LE</td>
-                                            <td>{createSelectTag("distanceLeSphere", distanceSphereData, formData.distanceLeSphere)}</td>
-                                            <td>{createSelectTag("distanceLeCylinder", distanceCylinderData, formData.distanceLeCylinder)}</td>
+                                            <td>
+                                                <select className='form-select' id="signLeSphr" name="signLeSphr" value={sign.signLeSphr}
+                                                    onChange={handleSignChange} >
+                                                    <option value="+">+</option>
+                                                    <option value="-">-</option>
+                                                </select>
+                                                {createSelectTag("distanceLeSphere", distanceSphereData, formData.distanceLeSphere)}</td>
+                                            <td>
+                                                <select className='form-select' id="signLeCyln" name="signLeCyln" value={sign.signLeCyln}
+                                                    onChange={handleSignChange} >
+                                                    <option value="+">+</option>
+                                                    <option value="-">-</option>
+                                                </select>
+                                                {createSelectTag("distanceLeCylinder", distanceCylinderData, formData.distanceLeCylinder)}</td>
                                             <td><input type='text' id='distanceLeAxis' name='distanceLeAxis' className='form-control'
                                                 value={formData.distanceLeAxis} onChange={handleFormDataChange} /></td>
                                             <td><input type='text' id='distanceLePrism' name='distanceLePrism' className='form-control'
@@ -313,8 +367,8 @@ const DataIntake = () => {
                                             className='form-control' style={{ width: "20%" }} />&nbsp;mmHg</span>
                                     </div>
                                     <div className='col'>
-                                        <textarea id="iopDesc" name="iopDesc" value={formData.iopDesc} 
-                                        onChange={handleFormDataChange}  className='form-control iopDesc'/>
+                                        <textarea id="iopDesc" name="iopDesc" value={formData.iopDesc}
+                                            onChange={handleFormDataChange} className='form-control iopDesc' />
                                     </div>
                                 </div>
                                 <div className='row'>
@@ -344,7 +398,7 @@ const DataIntake = () => {
                                     <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
                                         style={{ width: "25%" }}
                                         onChange={handleMedChange} />
-                                    <img src="./plus.png" alt="add" className="lm-5 plus-icon" onClick={addMedicine}/>
+                                    <img src="./plus.png" alt="add" className="lm-5 plus-icon" onClick={addMedicine} />
                                 </div>
                                 <div>
                                     <b>Added Medicines</b>
@@ -368,7 +422,7 @@ const DataIntake = () => {
                             <option value={4}>4</option>
                         </datalist> */}
 
-                        
+
 
                         <div style={{ float: "right" }}>
                             <button style={{ marginRight: "15px" }} className="mt-3 btn btn-secondary">Cancel</button>
