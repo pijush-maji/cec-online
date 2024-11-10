@@ -1,6 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const [query,setQuery] = useState("");
+    const navigate = useNavigate();
+
+    const handleQueryChange = (e) =>{
+        setQuery(e.target.value)
+    }
+    const handleSearch = () =>{
+        navigate(`search/${query}`);
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -18,8 +28,9 @@ const Header = () => {
                             <NavLink className="nav-link" to="/printprsc" style={{textDecoration:"none",color:"black"}}>Print</NavLink>
                         </li>
                     </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <form className="d-flex" onSubmit={handleSearch}>
+                        <input className="form-control me-2" type="search" name="query"
+                         onChange={handleQueryChange} placeholder="Search by Id or Name" aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
