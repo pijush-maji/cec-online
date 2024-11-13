@@ -1,3 +1,4 @@
+import { dataObj, signData } from "./CecConstants";
 import DataIntake from "./DataIntake";
 import Header from "./Header";
 
@@ -6,7 +7,7 @@ const Home = () => {
     return (
         <div >
             <Header />
-            <DataIntake />
+            <DataIntake patientData={dataObj} signData={signData}/>
         </div>
     );
 }

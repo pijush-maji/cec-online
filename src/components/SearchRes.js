@@ -1,45 +1,78 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Header from "./Header";
 
 const SearchRes = () => {
-    const { query } = useParams();
+    document.title = "Search"
     const [result, setResult] = useState({})
-    const navigate =useNavigate();
+    const navigate = useNavigate();
+    const { query } = useParams();
     useEffect(() => {
-        fetch("http://localhost:9091/search", {
-            method: 'Post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                searchText: query
-            })
-        })
-            .then(data => data.json())
-            .then(json => setResult(json));
-    }, [query])//added in the dependency array just to resolve warning which will cause netlify build fail
+        const searchPatient = async () => {
+            const res = await fetch("http://localhost:9091/search", {
+                method: 'Post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    searchText: query
+                })
+            });
+            const data = await res.json();
+            setResult(data);
+    
+        }
+        searchPatient();
+    }, [])
 
-    const handlerBack=()=>{
-        navigate("/")
-    } 
+    
+    const openPatientView = (patient) =>{
+        navigate(`/patients/${patient.patientId}`);
+    }
 
     let ele = (
-    <div className="card text-center">
-        <div className="card-body">
-            {result.errorMsg}
-        </div>
-    </div>);
+        <div className="card text-center">
+            <div className="card-body">
+                {result.errorMsg}
+            </div>
+        </div>);
     if (!result.errorFlag) {
-        
+        let patients = result.patients;
+        ele = (
+            <div className="card text-center">
+                <div className="card-body">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Prtient Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Dob</th>
+                                <th scope="col">Last Visited</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {patients !== undefined && patients.map(patient => {
+                                return (
+                                    <tr key={patient.patientId}>
+                                        <th scope="row"
+                                        style={{textDecoration:"underline",cursor:"pointer"}}
+                                        onClick={()=>openPatientView(patient)}>{patient.patientId}</th>
+                                        <td>{patient.patientName}</td>
+                                        <td>{patient.dob}</td>
+                                        <td>{patient.patientDetails[patient.patientDetails.length-1].dateOfVisit}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>);
     }
     return (
         <>
-            <div style={{ backgroundColor: "#e7efef", height: "45px" }}>
-                <button className="btn btn-outline-success" type="submit"
-                    style={{ float: "right", marginTop: "3px" }} onClick={handlerBack}>Go Back</button>
-            </div>
-            <div style={{margin:"10px",marginTop:"70px"}}>
+            <Header />
+            <div style={{ margin: "10px", marginTop: "70px" }}>
                 {ele}
             </div>
         </>

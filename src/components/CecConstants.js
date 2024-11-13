@@ -2,15 +2,17 @@
 var today = new Date().toJSON().slice(0, 10);
 
 export const dataObj = {
+    patientId: "",
     patientName: "",
     ageYear: "",
     ageMonth: "",
-    dob: "",
+    // dob: "",
     gender: "",
     dateOfVisit: today,
     address: "",
     mobile: "",
     careof: "",
+    visitId: "",
     va: "",
     vaReDist: "",
     vaRePh: "",
@@ -57,7 +59,7 @@ export const dataObj = {
 
 export const medicineObj = {
     eye: "",
-    medName: "",
+    medName: "Select",
     medType: ""
 }
 
@@ -77,4 +79,7 @@ export const distanceCylinderData = ["", "N/A", "0.00", "0.25", "0.50", "0.75", 
 export const addSphereData = ["", "N/A", "0.25", "0.50", "0.75", "1.00", "1.25", "1.50", "1.75", "2.00",
     "2.25", "2.50", "2.75", "3.00", "3.25", "3.50"];
 
+export const medicineList = [
+    "para","para1","med1","med2"
+]
 

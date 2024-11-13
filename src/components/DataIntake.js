@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import './DataIntake.css';
 import {
-    addSphereData, dataObj, distanceCylinderData,
-    distanceSphereData, medicineObj, signData
+    addSphereData, distanceCylinderData,
+    distanceSphereData, medicineList, medicineObj
 } from './CecConstants';
 import MedicineIntake from './MedicineIntake';
+import { useNavigate } from 'react-router-dom';
 
-const DataIntake = () => {
+const DataIntake = (props) => {
 
-    const [formData, setFormData] = useState(dataObj);
+    const [formData, setFormData] = useState(props.patientData);
     const [med, setMed] = useState(medicineObj);
-    const [medList, setMedList] = useState([]);
-    const [sign, setSign] = useState(signData)
+    const [medList, setMedList] = useState(props.patientData.medList);
+    const [sign, setSign] = useState(props.signData)
+    const navigate = useNavigate();
 
     const handleFormDataChange = (e) => {
         const { name, value } = e.target
@@ -52,10 +54,10 @@ const DataIntake = () => {
             formData.distanceLeCylinder = sign.signLeCyln+formData.distanceLeCylinder;
 
         
-        if(formData.addReSphere!=="" && formData.addReSphere!=="N/A" && formData.addReSphere!=="0.00" )
-            formData.addReSphere = "+"+formData.addReSphere;
-        if(formData.addLeSphere!=="" && formData.addLeSphere!=="N/A" && formData.addLeSphere!=="0.00" )
-            formData.addLeSphere = "+"+formData.addLeSphere;
+        // if(formData.addReSphere!=="" && formData.addReSphere!=="N/A" && formData.addReSphere!=="0.00" )
+        //     formData.addReSphere = "+"+formData.addReSphere;
+        // if(formData.addLeSphere!=="" && formData.addLeSphere!=="N/A" && formData.addLeSphere!=="0.00" )
+        //     formData.addLeSphere = "+"+formData.addLeSphere;
         
         fetch("http://localhost:9091/save", {
             method: 'Post',
@@ -66,9 +68,8 @@ const DataIntake = () => {
             body: JSON.stringify(formData)
         })
             .then(data => data.json())
-            .then(json => alert(json.msg));
-        setFormData(dataObj);
-        setMedList([])
+            .then(json => navigate("/saved",{state:json}));
+
     }
 
     const createSelectTag = (name, range, value) => {
@@ -86,6 +87,8 @@ const DataIntake = () => {
 
     const addMedicine = () => {
         setMedList(prvData => {
+            if(med.medName==="Select")
+                return[...prvData];
             return [
                 ...prvData,
                 med
@@ -120,7 +123,8 @@ const DataIntake = () => {
                         <div className="row">
                             <div className="col-2">
                                 <label htmlFor="patientId" className="form-label">Patient Id</label>
-                                <input type="text" id="patientId" className="form-control" value={1234} disabled />
+                                <input type="text" id="patientId" name='patientId' className="form-control" value={formData.patientId} 
+                                disabled />
                             </div>
                             <div className="col-3">
                                 <label htmlFor="name" className="form-label">Name</label>
@@ -137,11 +141,11 @@ const DataIntake = () => {
                                 <input type="number" name="ageMonth" className="form-control" placeholder="MM"
                                     min={0} max={11} onChange={handleFormDataChange} value={formData.ageMonth} />
                             </div>
-                            <div className='col-2'>
+                            {/* <div className='col-2'>
                                 <label htmlFor="dob" className="form-label">Date of Birth</label>
                                 <input type="date" className="form-control" id="dob" name="dob"
                                     onChange={handleFormDataChange} value={formData.dob} />
-                            </div>
+                            </div> */}
                             <div className='col-2'>
                                 <label htmlFor="gender" className="form-label">Gender</label>
                                 <select id="gender" name="gender" className="form-select"
@@ -154,7 +158,7 @@ const DataIntake = () => {
                             </div>
 
                         </div>
-                        <div className='row'>
+                        <div className='row mt-2'>
                             <div className='col-6'>
                                 <label htmlFor="address" className="form-label">Address</label>
                                 <input type="text" className="form-control" name="address"
@@ -391,9 +395,12 @@ const DataIntake = () => {
                                         <option value="LE">LE</option>
                                     </select>
                                     <select name="medName" value={med.medName} className="lm-5 form-select" onChange={handleMedChange}>
-                                        <option value="1">Med1</option>
-                                        <option value="2">Med2</option>
-                                        <option value="3">Med3</option>
+                                        <option value="Select">Select</option>
+                                        {medicineList.map(m=>{
+                                            return(
+                                                <option key={m} value={m}>{m}</option>
+                                            )
+                                        })}
                                     </select>
                                     <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
                                         style={{ width: "25%" }}
@@ -403,7 +410,7 @@ const DataIntake = () => {
                                 <div>
                                     <b>Added Medicines</b>
                                 </div>
-                                {medList.map((med, inx) => {
+                                {medList!==null && medList.map((med, inx) => {
                                     return (
                                         <MedicineIntake
                                             key={inx}
