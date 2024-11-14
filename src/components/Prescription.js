@@ -39,12 +39,6 @@ const Prescription = () => {
     if (g === "F") gender = "Female";
     else gender = "Others"
 
-    //len 13
-    let date = "09-09-2024";
-    //length 172
-    let address = "abc";
-    let mobile = "0987654321";
-
 
     return (
         <>
