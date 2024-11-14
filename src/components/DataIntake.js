@@ -6,6 +6,7 @@ import {
 } from './CecConstants';
 import MedicineIntake from './MedicineIntake';
 import { useNavigate } from 'react-router-dom';
+import plus from "./plus.png"
 
 const DataIntake = (props) => {
 
@@ -405,7 +406,7 @@ const DataIntake = (props) => {
                                     <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
                                         style={{ width: "25%" }}
                                         onChange={handleMedChange} />
-                                    <img src="./plus.png" alt="add" className="lm-5 plus-icon" onClick={addMedicine} />
+                                    <img src={plus} alt="add" className="lm-5 plus-icon" onClick={addMedicine} />
                                 </div>
                                 <div>
                                     <b>Added Medicines</b>
@@ -420,19 +421,7 @@ const DataIntake = (props) => {
                                 })}
                             </div>
                         </div>
-
-                        {/* <input list="browsers" name="browser" id="browser" className='form-select'/>
-                        <datalist id="browsers">
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                        </datalist> */}
-
-
-
                         <div style={{ float: "right" }}>
-                            <button style={{ marginRight: "15px" }} className="mt-3 btn btn-secondary">Cancel</button>
                             <button type="submit" className="mt-3 btn btn-primary">Submit</button>
                         </div>
                     </form>

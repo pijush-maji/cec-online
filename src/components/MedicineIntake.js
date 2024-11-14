@@ -1,4 +1,4 @@
-
+import minus from "./minus.png";
 
 const MedicineIntake = (props) =>{
 
@@ -19,7 +19,7 @@ const MedicineIntake = (props) =>{
             </select>
             <input disabled name="medType" value={props.med.medType} type="text" className="lm-5 form-control" 
             style={{width:"25%"}} onChange={handleMedChange} />
-            <img src="./minus.png" alt="delete" className="lm-5"  style={{cursor:"pointer"}} onClick={()=>props.removeMed(props.med)}/>
+            <img src={minus} alt="delete" className="lm-5"  style={{cursor:"pointer"}} onClick={()=>props.removeMed(props.med)}/>
         </div>
     )
 }
