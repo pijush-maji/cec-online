@@ -1,18 +1,16 @@
-import { Modal } from "bootstrap";
-import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Header from "./Header";
+import { useEffect } from "react";
 
 const DataIntakeDone = () => {
     document.textContent = "Patient Saved"
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    const btn = useRef(null);
-
-    useEffect(() => {
-        btn.current?.click();
-        
-    }, [])
+    useEffect(()=>{
+        if(state===undefined || state===null)
+            navigate("/")
+    },[navigate,state])
 
     const gotToHome = () => {
         navigate("/")
@@ -20,17 +18,17 @@ const DataIntakeDone = () => {
 
     return (
         <>
-            <button style={{ display: "none" }} ref={btn} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Modal Button
-            </button>
-            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
+            <Header />
+            <div className="patient-sum">
+                <div className="card" style={{ marginTop: "8%", width: "50%", marginLeft: "25%", paddingBottom:"2%" }}>
+                    <div className="card-body text-center m-auto">
+                        <div>
                             {state?.msg}
-                            <button type="button" className="btn btn-primary mt-4" data-bs-dismiss="modal"
-                                onClick={gotToHome} style={{ marginLeft: "44%" }}>OK</button>
                         </div>
+                    </div>
+                    <div className="row mt-4">
+                        <button type="submit" onClick={gotToHome}
+                            style={{ width: "10%", margin: "auto" }} className="btn btn-primary">Ok</button>
                     </div>
                 </div>
             </div>

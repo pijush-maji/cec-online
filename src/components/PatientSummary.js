@@ -22,7 +22,7 @@ const PatientSummary = () => {
             setPatient(data.patients[0]);
         }
         getPatient();
-    }, [])
+    }, [patientId])
 
     
 

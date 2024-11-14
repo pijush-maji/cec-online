@@ -24,7 +24,7 @@ const SearchRes = () => {
     
         }
         searchPatient();
-    }, [])
+    }, [query])
 
     
     const openPatientView = (patient) =>{

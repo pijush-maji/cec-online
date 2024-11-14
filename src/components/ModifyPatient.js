@@ -36,7 +36,7 @@ const ModifyPatient = () => {
         }
         getPatientVisitData();
 
-    },[])
+    },[visitId,patientId])
 
     
 
