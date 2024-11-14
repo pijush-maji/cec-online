@@ -20,9 +20,6 @@ const Header = () => {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/home" style={{textDecoration:"none",color:"black"}}>Home</NavLink>
                         </li>
-                        <li className="nav-item ms-4">
-                            <NavLink className="nav-link" to="/printprsc" style={{textDecoration:"none",color:"black"}}>Print</NavLink>
-                        </li>
                     </ul>
                     <form className="d-flex" onSubmit={handleSearch}>
                         <input className="form-control me-2" type="search" name="query"

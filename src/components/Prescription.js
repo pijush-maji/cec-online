@@ -2,11 +2,14 @@ import './Prescription.css';
 import logo from './ceclogo.PNG';
 import arrow_icon from './arrow_icon.PNG';
 import Medicine from './Medicine';
+import { useLocation } from 'react-router-dom';
 
 const Prescription = () => {
 
 
-    document.title = "CEC-20240911001";
+    document.title = "Prescription";
+
+    const { state } = useLocation();
 
     const medicines = [
         { eye: "BE", name: "Ciplox", "type": "e/d", amount: "3t/d", duration: "7days" },
@@ -28,9 +31,14 @@ const Prescription = () => {
     //length 81
     //let name = "Partha Sarathi Pal";
     //length 14
-    let age = "25yr 11m";
+    let age = state?.ageYear + "yr " + state?.ageMonth + "m";
     //len 12
-    let gender = "Others";
+    let gender = "";
+    let g = state?.gender;
+    if (g === "M") gender = "Male";
+    if (g === "F") gender = "Female";
+    else gender = "Others"
+
     //len 13
     let date = "09-09-2024";
     //length 172
@@ -53,7 +61,7 @@ const Prescription = () => {
                                 </div>
                             </div>
                             <div className="doc-name" style={{ fontSize: "20px" }}>
-                                <span style={{fontWeight:"500"}}>Aritra Chinya</span>
+                                <span style={{ fontWeight: "500" }}>Aritra Chinya</span>
                                 <i> (Consultant Optometrist)</i>
                             </div>
                             <div className="doc-deg">
@@ -77,28 +85,28 @@ const Prescription = () => {
                 <hr />
                 <div className='row mb-2'>
                     <div className='col-3'>
-                        MRID : <span style={{}}><i>CEC-20240911001</i></span>
+                        MRID : <span style={{}}><i>{state?.patientId}</i></span>
                     </div>
                     <div className='col-5'>
-                        Name : <span  style={{ }}><i>Aritra Chinya</i></span>
+                        Name : <span style={{}}><i>{state?.patientName}</i></span>
                     </div>
                     <div className='col'>
-                        Age: <span  style={{ width: "62%" }}>{age}</span>
+                        Age: <span style={{ width: "62%" }}>{age}</span>
                     </div>
                     <div className='col'>
-                        Gender: <span  style={{ width: "50%" }}>{gender}</span>
+                        Gender: <span style={{ width: "50%" }}>{gender}</span>
                     </div>
 
                 </div>
                 <div className='row mb-2'>
                     <div className='col-7'>
-                        Address: <span style={{ width: "80%" }}>{address}</span>
+                        Address: <span style={{ width: "80%" }}>{state?.address}</span>
                     </div>
                     <div className='col'>
-                        Mobile: <span style={{ width: "62%" }}>{mobile}</span>
+                        Mobile: <span style={{ width: "62%" }}>{state?.mobile}</span>
                     </div>
                     <div className='col'>
-                        Date: <span style={{ width: "62%" }}>{date}</span>
+                        Date: <span style={{ width: "62%" }}>{state?.dateOfVisit}</span>
                     </div>
                 </div>
                 <hr />
@@ -177,7 +185,7 @@ const Prescription = () => {
                         </table>
                     </div>
                 </div>
-                <div className='row' style={{ height: "27rem",marginTop:"-2%" }}>
+                <div className='row' style={{ height: "27rem", marginTop: "-2%" }}>
                     <div className='col-8'>
                         <h5 style={{ textAlign: "center" }}>Slit Lamp Examination</h5>
                         <table className="table table-bordered border-dark slit-tables">
@@ -190,7 +198,7 @@ const Prescription = () => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope='row' style={{width:"10%"}}>Eyelids</th>
+                                    <th scope='row' style={{ width: "10%" }}>Eyelids</th>
                                     <td>test</td>
                                     <td>test</td>
                                 </tr>

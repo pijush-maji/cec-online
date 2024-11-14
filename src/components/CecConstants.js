@@ -11,7 +11,7 @@ export const dataObj = {
     dateOfVisit: today,
     address: "",
     mobile: "",
-    careof: "",
+    careOf: "",
     visitId: "",
     va: "",
     vaReDist: "",

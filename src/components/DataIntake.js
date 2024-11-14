@@ -44,32 +44,26 @@ const DataIntake = (props) => {
             alert("Patient Name is blank!");
             return;
         }
-        if(formData.ageYear === "" || formData.ageYear === " "){
-            if(formData.ageMonth === "" || formData.ageMonth === " "){
+        if (formData.ageYear === "" || formData.ageYear === " ") {
+            if (formData.ageMonth === "" || formData.ageMonth === " ") {
                 alert("Patient age is blank!");
                 return;
             }
         }
-        if(formData.gender==="" || formData.gender===" "){
+        if (formData.gender === "" || formData.gender === " ") {
             alert("Patient Gender is blank!");
             return;
-        }            
-        if(formData.distanceReSphere!=="" && formData.distanceReSphere!=="N/A" && formData.distanceReSphere!=="0.00" ){
-            formData.distanceReSphere = sign.signReSphr+formData.distanceReSphere;
         }
-        if(formData.distanceLeSphere!=="" && formData.distanceLeSphere!=="N/A" && formData.distanceLeSphere!=="0.00" )
-            formData.distanceLeSphere = sign.signLeSphr+formData.distanceLeSphere;
-        if(formData.distanceReCylinder!=="" && formData.distanceReCylinder!=="N/A" && formData.distanceReCylinder!=="0.00" )
-            formData.distanceReCylinder = sign.signReCyln+formData.distanceReCylinder;
-        if(formData.distanceLeCylinder!=="" && formData.distanceLeCylinder!=="N/A" && formData.distanceLeCylinder!=="0.00" )
-            formData.distanceLeCylinder = sign.signLeCyln+formData.distanceLeCylinder;
+        if (formData.distanceReSphere !== "" && formData.distanceReSphere !== "N/A" && formData.distanceReSphere !== "0.00") {
+            formData.distanceReSphere = sign.signReSphr + formData.distanceReSphere;
+        }
+        if (formData.distanceLeSphere !== "" && formData.distanceLeSphere !== "N/A" && formData.distanceLeSphere !== "0.00")
+            formData.distanceLeSphere = sign.signLeSphr + formData.distanceLeSphere;
+        if (formData.distanceReCylinder !== "" && formData.distanceReCylinder !== "N/A" && formData.distanceReCylinder !== "0.00")
+            formData.distanceReCylinder = sign.signReCyln + formData.distanceReCylinder;
+        if (formData.distanceLeCylinder !== "" && formData.distanceLeCylinder !== "N/A" && formData.distanceLeCylinder !== "0.00")
+            formData.distanceLeCylinder = sign.signLeCyln + formData.distanceLeCylinder;
 
-        
-        // if(formData.addReSphere!=="" && formData.addReSphere!=="N/A" && formData.addReSphere!=="0.00" )
-        //     formData.addReSphere = "+"+formData.addReSphere;
-        // if(formData.addLeSphere!=="" && formData.addLeSphere!=="N/A" && formData.addLeSphere!=="0.00" )
-        //     formData.addLeSphere = "+"+formData.addLeSphere;
-        
         fetch("http://localhost:9091/save", {
             method: 'Post',
             headers: {
@@ -79,7 +73,7 @@ const DataIntake = (props) => {
             body: JSON.stringify(formData)
         })
             .then(data => data.json())
-            .then(json => navigate("/saved",{state:json}));
+            .then(json => navigate("/saved", { state: json }));
 
     }
 
@@ -98,8 +92,8 @@ const DataIntake = (props) => {
 
     const addMedicine = () => {
         setMedList(prvData => {
-            if(med.medName==="Select")
-                return[...prvData];
+            if (med.medName === "Select")
+                return [...prvData];
             return [
                 ...prvData,
                 med
@@ -125,6 +119,10 @@ const DataIntake = (props) => {
 
     }
 
+    const print = () => {
+        navigate("/printprsc", { state: props.patientData })
+    }
+
     return (
         <>
             <div className="card" style={{ backgroundColor: "aliceblue" }}>
@@ -134,8 +132,8 @@ const DataIntake = (props) => {
                         <div className="row">
                             <div className="col-2">
                                 <label htmlFor="patientId" className="form-label">Patient Id</label>
-                                <input type="text" id="patientId" name='patientId' className="form-control" value={formData.patientId} 
-                                disabled />
+                                <input type="text" id="patientId" name='patientId' className="form-control" value={formData.patientId}
+                                    disabled />
                             </div>
                             <div className="col-3">
                                 <label htmlFor="name" className="form-label">Name</label>
@@ -190,8 +188,8 @@ const DataIntake = (props) => {
                         <div className='row mt-4'>
                             <div className='col'>
                                 <label htmlFor="adtnInfo" className="form-label">Additional Info</label>
-                                <textarea rows="4" className="form-control" name="careof"
-                                    onChange={handleFormDataChange} value={formData.careof}></textarea>
+                                <textarea rows="4" className="form-control" name="careOf"
+                                    onChange={handleFormDataChange} value={formData.careOf}></textarea>
                             </div>
                             <div className='col'>
                                 <h6>V<sub>A</sub> Data</h6>
@@ -407,8 +405,8 @@ const DataIntake = (props) => {
                                     </select>
                                     <select name="medName" value={med.medName} className="lm-5 form-select" onChange={handleMedChange}>
                                         <option value="Select">Select</option>
-                                        {medicineList.map(m=>{
-                                            return(
+                                        {medicineList.map(m => {
+                                            return (
                                                 <option key={m} value={m}>{m}</option>
                                             )
                                         })}
@@ -421,7 +419,7 @@ const DataIntake = (props) => {
                                 <div>
                                     <b>Added Medicines</b>
                                 </div>
-                                {medList!==null && medList.map((med, inx) => {
+                                {medList !== null && medList.map((med, inx) => {
                                     return (
                                         <MedicineIntake
                                             key={inx}
@@ -435,6 +433,13 @@ const DataIntake = (props) => {
                             <button type="submit" className="mt-3 btn btn-primary">Submit</button>
                         </div>
                     </form>
+                    {
+                        
+                        formData.patientId !== "" &&
+                        <div style={{ marginLeft: "89%" }}>
+                            <button type="submit" className="mt-3 btn btn-success"
+                                onClick={print}>Print</button>
+                        </div>}
                 </div>
             </div>
         </>
