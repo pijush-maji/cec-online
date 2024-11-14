@@ -44,6 +44,16 @@ const DataIntake = (props) => {
             alert("Patient Name is blank!");
             return;
         }
+        if(formData.ageYear === "" || formData.ageYear === " "){
+            if(formData.ageMonth === "" || formData.ageMonth === " "){
+                alert("Patient age is blank!");
+                return;
+            }
+        }
+        if(formData.gender==="" || formData.gender===" "){
+            alert("Patient Gender is blank!");
+            return;
+        }            
         if(formData.distanceReSphere!=="" && formData.distanceReSphere!=="N/A" && formData.distanceReSphere!=="0.00" ){
             formData.distanceReSphere = sign.signReSphr+formData.distanceReSphere;
         }
