@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "./Header";
+import { getAge } from "../util/Util";
 
 const SearchRes = () => {
     document.title = "Search"
@@ -31,6 +32,11 @@ const SearchRes = () => {
         navigate(`/patients/${patient.patientId}`);
     }
 
+    const getAgeYear = (dob) =>{
+        let age = getAge(dob);
+        return age?.ageY + "yr " + age?.ageM + "m"
+    }
+
     let ele = (
         <div className="card text-center">
             <div className="card-body">
@@ -48,6 +54,7 @@ const SearchRes = () => {
                                 <th scope="col">Prtient Id</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Dob</th>
+                                <th scope="col">Mobile</th>
                                 <th scope="col">Last Visited</th>
                             </tr>
                         </thead>
@@ -55,11 +62,12 @@ const SearchRes = () => {
                             {patients !== undefined && patients.map(patient => {
                                 return (
                                     <tr key={patient.patientId}>
-                                        <th scope="row"
+                                        <th
                                         style={{textDecoration:"underline",cursor:"pointer"}}
                                         onClick={()=>openPatientView(patient)}>{patient.patientId}</th>
                                         <td>{patient.patientName}</td>
-                                        <td>{patient.dob}</td>
+                                        <td>{getAgeYear(patient.dob)}</td>
+                                        <td>{patient.mobile}</td>
                                         <td>{patient.patientDetails[patient.patientDetails.length-1].dateOfVisit}</td>
                                     </tr>
                                 )

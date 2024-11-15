@@ -92,7 +92,7 @@ const DataIntake = (props) => {
 
     const addMedicine = () => {
         setMedList(prvData => {
-            if (med.medName === "Select")
+            if (med.medName === "")
                 return [...prvData];
             return [
                 ...prvData,
@@ -150,11 +150,6 @@ const DataIntake = (props) => {
                                 <input type="number" name="ageMonth" className="form-control" placeholder="MM"
                                     min={0} max={11} onChange={handleFormDataChange} value={formData.ageMonth} />
                             </div>
-                            {/* <div className='col-2'>
-                                <label htmlFor="dob" className="form-label">Date of Birth</label>
-                                <input type="date" className="form-control" id="dob" name="dob"
-                                    onChange={handleFormDataChange} value={formData.dob} />
-                            </div> */}
                             <div className='col-2'>
                                 <label htmlFor="gender" className="form-label">Gender</label>
                                 <select id="gender" name="gender" className="form-select"
@@ -188,7 +183,7 @@ const DataIntake = (props) => {
                         <div className='row mt-4'>
                             <div className='col'>
                                 <label htmlFor="adtnInfo" className="form-label">Additional Info</label>
-                                <textarea rows="4" className="form-control" name="careOf"
+                                <textarea rows="4" className="form-control" name="careOf" placeholder='Care of'
                                     onChange={handleFormDataChange} value={formData.careOf}></textarea>
                             </div>
                             <div className='col'>
@@ -403,14 +398,15 @@ const DataIntake = (props) => {
                                         <option value="LE">RE</option>
                                         <option value="LE">LE</option>
                                     </select>
-                                    <select name="medName" value={med.medName} className="lm-5 form-select" onChange={handleMedChange}>
-                                        <option value="Select">Select</option>
+                                    <input type="text" name="medName" value={med.medName} className="lm-5 form-control" onChange={handleMedChange}
+                                        placeholder='Medicine' list="medList" />
+                                    <datalist id="medList">
                                         {medicineList.map(m => {
                                             return (
                                                 <option key={m} value={m}>{m}</option>
                                             )
                                         })}
-                                    </select>
+                                    </datalist>
                                     <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
                                         style={{ width: "25%" }}
                                         onChange={handleMedChange} />
@@ -434,7 +430,7 @@ const DataIntake = (props) => {
                         </div>
                     </form>
                     {
-                        
+
                         formData.patientId !== "" &&
                         <div style={{ marginLeft: "89%" }}>
                             <button type="submit" className="mt-3 btn btn-success"

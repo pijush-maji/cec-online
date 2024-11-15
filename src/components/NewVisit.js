@@ -7,7 +7,6 @@ import { signData } from "./CecConstants";
 const NewVisit = () =>{
     document.title = "New Visit"
     const {state} = useLocation();
-    console.log(state);
     const patientDetails = buildNewVisitModel(state);
     return(
         <>

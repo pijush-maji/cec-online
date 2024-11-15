@@ -58,8 +58,8 @@ export const dataObj = {
 };
 
 export const medicineObj = {
-    eye: "",
-    medName: "Select",
+    eye: "BE",
+    medName: "",
     medType: ""
 }
 

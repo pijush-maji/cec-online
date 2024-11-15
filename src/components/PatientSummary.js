@@ -78,7 +78,9 @@ const PatientSummary = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {patient.patientDetails !== undefined && patient.patientDetails.map(visit => {
+                                {patient.patientDetails !== undefined && patient.patientDetails
+                                    .sort((p1,p2)=>p2.visitId - p1.visitId)
+                                    .map(visit => {
                                     return (
                                         <tr key={visit.visitId}>
                                             <th scope="row"

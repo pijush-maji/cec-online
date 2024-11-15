@@ -23,7 +23,6 @@ const ModifyPatient = () => {
             const data = await res.json();
             setPatientDetails(data);
             const signData = getSignData(data);
-            console.log(signData);
             setPatientDetails(prvData =>{
                 return{
                     ...prvData,
