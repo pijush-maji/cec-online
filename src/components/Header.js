@@ -21,11 +21,12 @@ const Header = () => {
                             <NavLink className="nav-link" to="/home" style={{textDecoration:"none",color:"black"}}>Home</NavLink>
                         </li>
                     </ul>
-                    <form className="d-flex" onSubmit={handleSearch}>
+                    {document.title!=="Search" &&
+                        <form className="d-flex" onSubmit={handleSearch}>
                         <input className="form-control me-2" type="search" name="query"
                          onChange={handleQueryChange} placeholder="Search by Id or Name" aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    </form>}
                 
             </div>
         </nav>
