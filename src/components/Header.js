@@ -21,6 +21,7 @@ const Header = () => {
                             <NavLink className="nav-link" to="/home" style={{textDecoration:"none",color:"black"}}>Home</NavLink>
                         </li>
                     </ul>
+                    <NavLink className="nav-link" to="/history" style={{textDecoration:"none",color:"black", marginRight:"2%"}}>Visited Patients</NavLink>
                     {document.title!=="Search" &&
                         <form className="d-flex" onSubmit={handleSearch}>
                         <input className="form-control me-2" type="search" name="query"

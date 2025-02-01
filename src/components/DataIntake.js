@@ -44,12 +44,12 @@ const DataIntake = (props) => {
             alert("Patient Name is blank!");
             return;
         }
-        if (formData.ageYear === "" || formData.ageYear === " ") {
-            if (formData.ageMonth === "" || formData.ageMonth === " ") {
-                alert("Patient age is blank!");
-                return;
-            }
-        }
+        // if (formData.ageYear === "" || formData.ageYear === " ") {
+        //     if (formData.ageMonth === "" || formData.ageMonth === " ") {
+        //         alert("Patient age is blank!");
+        //         return;
+        //     }
+        // }
         if (formData.gender === "" || formData.gender === " ") {
             alert("Patient Gender is blank!");
             return;
