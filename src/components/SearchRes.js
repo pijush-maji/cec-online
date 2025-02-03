@@ -10,7 +10,7 @@ const SearchRes = () => {
     const { query } = useParams();
     useEffect(() => {
         const searchPatient = async () => {
-            const res = await fetch("http://localhost:9091/search", {
+            await fetch("http://localhost:9091/search", {
                 method: 'Post',
                 headers: {
                     'Accept': 'application/json',
@@ -19,9 +19,9 @@ const SearchRes = () => {
                 body: JSON.stringify({
                     searchText: query
                 })
-            });
-            const data = await res.json();
-            setResult(data);
+            }).then(data=> data.json())
+            .then(data=>setResult(data))
+            .catch(err=>alert("Error Occured"));
     
         }
         searchPatient();

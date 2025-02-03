@@ -16,6 +16,7 @@ function App() {
       <Route path='/saved' Component={DataIntakeDone} />
       <Route path='/printprsc' Component={Prescription} />
       <Route path='/search/:query' Component={SearchRes}/>
+      <Route path='/history/:query' Component={SearchRes} />
       <Route path='/patients/:patientId' Component={PatientSummary}/>
       <Route path='/patients/:patientId/:visitId' Component={ModifyPatient}/>
       <Route path='/patients/:patientId/newVisit' Component={NewVisit}/>

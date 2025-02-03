@@ -48,3 +48,35 @@ export const getAge = (dateString) => {
     }
     return {ageY:ageY,ageM:ageM};
 }
+
+export const buildRxDataForNewVisit = (patient) => {
+    let rxSpec = {}
+    if(patient!==undefined){
+        rxSpec = getSignData(patient);
+        rxSpec.distanceReAxis = patient.distanceReAxis;
+        rxSpec.distanceRePrism = patient.distanceRePrism;
+        rxSpec.distanceReVa = patient.distanceReVa;
+        rxSpec.distanceLeAxis = patient.distanceLeAxis;
+        rxSpec.distanceLePrism = patient.distanceLePrism;
+        rxSpec.distanceLeVa = patient.distanceLeVa;
+        rxSpec.addReSphere = patient.addReSphere;
+        rxSpec.addLeSphere = patient.addLeSphere;
+        rxSpec.addInfo = patient.addInfo
+    }
+    return rxSpec;
+}
+
+export const buildVaDataForNewVisit = (patient) =>{
+    let vaData = {}
+    if(patient!==undefined){
+        vaData.va = patient.va;
+        vaData.vaReDist = patient.vaReDist;
+        vaData.vaRePh = patient.vaRePh;
+        vaData.vaReNear = patient.vaReNear;
+        vaData.vaLeDist = patient.vaLeDist;
+        vaData.vaLePh = patient.vaLePh;
+        vaData.vaLeNear = patient.vaLeNear;
+        vaData.vaRemarks = patient.vaRemarks;
+    }
+    return vaData;
+}

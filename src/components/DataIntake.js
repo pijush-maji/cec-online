@@ -1,20 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './DataIntake.css';
 import {
-    addSphereData, distanceCylinderData,
+    addSphereData, dataObj, distanceCylinderData,
     distanceSphereData, medicineList, medicineObj
 } from './CecConstants';
 import MedicineIntake from './MedicineIntake';
 import { useNavigate } from 'react-router-dom';
-import plus from "./plus.png"
+import plus from "./plus.png";
+import edit from "./edit-text.png";
+import save from "./save.png";
+import leftArrow from "./icons/left-arrow.png";
+import rightArrow from "./icons/right-arrow.png";
+import {buildRxDataForNewVisit, buildVaDataForNewVisit} from "../util/Util";
 
 const DataIntake = (props) => {
 
-    const [formData, setFormData] = useState(props.patientData);
+    const [formData, setFormData] = useState(props.patientData || dataObj);
     const [med, setMed] = useState(medicineObj);
     const [medList, setMedList] = useState(props.patientData.medList);
     const [sign, setSign] = useState(props.signData)
+    const [hlpTxt,setHlpTxt] = useState("");
+    const [enableHlpTxt, setEnableHlpTxt] = useState(false);
+    const [hlpTxtLeftAligned, setHlpTxtLeftAligned] = useState(true);
+
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        fetch("http://localhost:9091/getHelpText", {
+            method: 'Get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(data=>data.json())
+        .then(data=>setHlpTxt(data.text))
+        .catch(err=>setHlpTxt(""));
+    },[formData])
 
     const handleFormDataChange = (e) => {
         const { name, value } = e.target
@@ -34,6 +56,9 @@ const DataIntake = (props) => {
                 [name]: value
             }
         })
+    }
+    const handleHlpTxtChange = (e) =>{
+        setHlpTxt(e.target.value);
     }
 
     const handleSubmit = (e) => {
@@ -73,8 +98,43 @@ const DataIntake = (props) => {
             body: JSON.stringify(formData)
         })
             .then(data => data.json())
-            .then(json => navigate("/saved", { state: json }));
+            .then(json => navigate("/saved", { state: json }))
+            .catch(err=>alert("Error in saving data."))
 
+    }
+
+    const saveHlpTxt = (e) => {
+        setEnableHlpTxt(false);
+        fetch("http://localhost:9091/saveHelpText", {
+            method: 'Post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: hlpTxt
+        })
+    }
+
+    const fetchVaDetails = (e) =>{
+        e.preventDefault();
+        const vaData = buildVaDataForNewVisit(props.lastVisitedData);
+        setFormData(prvData=>{
+            const obj = Object.assign(formData,vaData);
+            return{
+                ...prvData,obj
+            }
+        });
+    }
+
+    const fetchRxSpec = (e) =>{
+        e.preventDefault();
+        const rxSpec = buildRxDataForNewVisit(props.lastVisitedData);        
+        setFormData(prvData=>{
+            const obj = Object.assign(formData,rxSpec);
+            return{
+                ...prvData,obj
+            }
+        });
     }
 
     const createSelectTag = (name, range, value) => {
@@ -184,9 +244,10 @@ const DataIntake = (props) => {
                             <div className='col'>
                                 <label htmlFor="adtnInfo" className="form-label">Additional Info</label>
                                 <textarea rows="4" className="form-control" name="careOf" placeholder='Care of'
-                                    onChange={handleFormDataChange} value={formData.careOf}></textarea>
+                                    onChange={handleFormDataChange} value={formData.careOf}></textarea>                                
                             </div>
                             <div className='col'>
+                            {props.lastVisitedData!==undefined && <button onClick={fetchVaDetails} className="mt-3 btn btn-primary">Fetch From Last Visit</button>}
                                 <h6>V<sub>A</sub> Data</h6>
                                 <table className='table table-bordered border-dark'>
                                     <thead>
@@ -236,7 +297,8 @@ const DataIntake = (props) => {
                                 </table>
                             </div>
                         </div>
-                        <div className='row mt-4'>
+                        {props.lastVisitedData!==undefined && <button onClick={fetchRxSpec} className="mt-3 btn btn-primary">Fetch From Last Visit</button>}
+                        <div className='row mt-4'>                        
                             <div className='col'>
                                 <table className="table table-bordered border-dark">
                                     <thead>
@@ -375,7 +437,9 @@ const DataIntake = (props) => {
                                             className='form-control' style={{ width: "20%" }} />&nbsp;mmHg</span>
                                     </div>
                                     <div className='col'>
-                                        <textarea id="iopDesc" name="iopDesc" value={formData.iopDesc}
+                                        <textarea id="iopReDesc" name="iopReDesc" value={formData.iopReDesc}
+                                            onChange={handleFormDataChange} className='form-control iopDesc' />
+                                        <textarea id="iopLeDesc" name="iopLeDesc" value={formData.iopLeDesc}
                                             onChange={handleFormDataChange} className='form-control iopDesc' />
                                     </div>
                                 </div>
@@ -390,15 +454,16 @@ const DataIntake = (props) => {
                             </div>
                             <div className='col'>
                                 <b>Add Medicine</b><br />
-                                <div style={{ display: "inline-flex", height: "37px", marginTop: "13px" }}>
+                                <div style={{ display: "inline-flex",  marginTop: "13px" }}>
                                     <select name="eye" value={med.eye} className="form-select"
-                                        style={{ width: "25%" }}
+                                        style={{ width: "25%", height: "37px", marginTop:"35px" }}
                                         onChange={handleMedChange}>
                                         <option value="BE">BE</option>
                                         <option value="LE">RE</option>
                                         <option value="LE">LE</option>
                                     </select>
-                                    <input type="text" name="medName" value={med.medName} className="lm-5 form-control" onChange={handleMedChange}
+                                    <input type="text" name="medName" value={med.medName} style={{height: "37px", marginTop:"35px"}}
+                                    className="lm-5 form-control" onChange={handleMedChange}
                                         placeholder='Medicine' list="medList" />
                                     <datalist id="medList">
                                         {medicineList.map(m => {
@@ -407,10 +472,9 @@ const DataIntake = (props) => {
                                             )
                                         })}
                                     </datalist>
-                                    <input name="medType" value={med.medType} type="text" className="lm-5 form-control"
-                                        style={{ width: "25%" }}
-                                        onChange={handleMedChange} />
-                                    <img src={plus} alt="add" className="lm-5 plus-icon" onClick={addMedicine} />
+                                    <textarea name="medUsage" rows="4" value={med.medUsage} type="text" className="lm-5 form-control" style={{width:"100%"}}
+                                        onChange={handleMedChange} ></textarea>
+                                    <img src={plus} alt="add" style={{height: "30px", marginTop:"35px"}} className="lm-5 plus-icon" onClick={addMedicine} />
                                 </div>
                                 <div>
                                     <b>Added Medicines</b>
@@ -436,6 +500,22 @@ const DataIntake = (props) => {
                             <button type="submit" className="mt-3 btn btn-success"
                                 onClick={print}>Print</button>
                         </div>}
+                        <div className="container mb-5" style={{position:"fixed", bottom:"0", borderStyle:"solid",
+                            borderColor: "green", width:"30%", backgroundColor:"#c3da9e",
+                            right:!hlpTxtLeftAligned? "0":"" }}>
+                            <form>
+                                <div style={{float:"right"}}>
+                                    {hlpTxtLeftAligned && 
+                                    <img src={rightArrow} alt="rightArrow" style={{height: "30px", marginTop:"35px", cursor:"pointer"}} className="me-4 pb-2" onClick={()=>setHlpTxtLeftAligned(false)}/>}
+                                    {!hlpTxtLeftAligned && 
+                                    <img src={leftArrow} alt="leftArrow" style={{height: "30px", marginTop:"35px", cursor:"pointer"}} className="me-4 pb-2" onClick={()=>setHlpTxtLeftAligned(true)}/>}
+                                    <img src={edit} alt="edit" style={{height: "30px", marginTop:"35px", cursor:"pointer"}} className="me-4 pb-2" onClick={()=>setEnableHlpTxt(true)}/>
+                                    <img src={save} alt="save" style={{height: "30px", marginTop:"35px", cursor:"pointer"}} className="me-3 pb-2" onClick={saveHlpTxt}/>
+                                </div>
+                                <textarea disabled={!enableHlpTxt} rows={5} id="hlpTxt" name="hlpTxt" value={hlpTxt} onChange={handleHlpTxtChange} 
+                                className='form-control mb-4'/>
+                            </form>
+                        </div>
                 </div>
             </div>
         </>

@@ -50,7 +50,8 @@ export const dataObj = {
     pupilLe: "Round, Regular, Reacting, No RAPD",
     iopRe: "",
     iopLe: "",
-    iopDesc: "",
+    iopReDesc: "",
+    iopLeDesc: "",
     diagnosis: "",
     planAdv: "",
     medList: []
@@ -60,7 +61,7 @@ export const dataObj = {
 export const medicineObj = {
     eye: "BE",
     medName: "",
-    medType: ""
+    medUsage: ""
 }
 
 export const signData = {

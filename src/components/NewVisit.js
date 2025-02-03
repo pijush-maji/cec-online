@@ -12,7 +12,7 @@ const NewVisit = () =>{
         <>
             <Header />
             { patientDetails!==undefined &&
-                <DataIntake patientData={patientDetails} signData={signData} />}
+                <DataIntake patientData={patientDetails} lastVisitedData={state?.patientDetails[0]} signData={signData} />}
         </>
     )
 }

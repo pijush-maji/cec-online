@@ -15,9 +15,9 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 5px;
 }
 .iopDesc{
-    width: 60%;
-    margin-left: -28%;
-    margin-top: 18%;
+    /* width: 60%; */
+    margin-left: -31%;
+    margin-top: 3%;
 }
 .plus-icon{
     margin-top: 1%;
